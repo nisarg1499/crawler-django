@@ -11,14 +11,17 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-from .models import History
+from .models import History, Blogs
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
-from trie import Trie
+from .trie import Trie
+from django.db.models import Q
+
 
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
 @csrf_exempt
+@login_required
 def crawlBlogs(request):
 	tag = request.GET['tag']
 
@@ -30,23 +33,23 @@ def crawlBlogs(request):
 
 
 @login_required
-def getBlogs(request):
+def getBlogs(request,tag):
 
-	tag = request.GET['tag']
 	get_user = request.user
 	user = User.objects.get(id = get_user.id)
-	print(get_user.id)
-	print(get_user.username)
+	# print(get_user.id)
+	# print(get_user.username)
+
+	filter = Q(tag__icontains = tag)
+	filtered = Blogs.objects.filter(filter)
 
 	history = History(user_id = user, 
 					username = get_user.username,
 					history = tag)
 
-	# print(history)
 	history.save()
-	print('History saved')
-	# logout(request)
-	return HttpResponse(201)
+	print(filtered.values())
+	return HttpResponse('Blogs printed on console')
 
 
 @login_required
@@ -83,9 +86,6 @@ def autoComplete(request, word):
 		t.insert(words)
 
 	print(t.auto(word))
-
-
-
-
+	return HttpResponse('All words printed on console')
 
 

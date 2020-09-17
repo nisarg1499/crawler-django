@@ -7,7 +7,7 @@ urlpatterns = [
 	path('register/', views_register.signUp, name = 'signUp'),
 	path('login/', views_register.login, name = 'login'),
 	path('logout/', views.logout, name = 'logout'),
-	path('history/', views.getBlogs, name = 'getBlogs'),
+	path('get/<str:tag>', views.getBlogs, name = 'getBlogs'),
 	path('show/', views.showHistory, name = 'showHistory'),
 	path('auto/<str:word>', views.autoComplete, name = 'autoComplete')
 ]

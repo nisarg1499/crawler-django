@@ -45,22 +45,22 @@ class Trie:
 		return 'Completed'
 
 
-list = ['age',
-	'agee',
-	'agree',
-	'bowl',
-	'ball',
-	'bat',
-	'bark',
-	'ba',
-	'bench',
-	'bet',
-	'bery',
-	'blink',
-	'blie',]
+# list = ['age',
+# 	'agee',
+# 	'agree',
+# 	'bowl',
+# 	'ball',
+# 	'bat',
+# 	'bark',
+# 	'ba',
+# 	'bench',
+# 	'bet',
+# 	'bery',
+# 	'blink',
+# 	'blie',]
 
-t = Trie()
-for words in list:
-	t.insert(words)
+# t = Trie()
+# for words in list:
+# 	t.insert(words)
 
-print(t.search('aaa'))
+# print(t.search('aaa'))
