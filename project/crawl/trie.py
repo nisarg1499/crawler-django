@@ -4,6 +4,7 @@ class Trie:
 		self.children = {}
 		self.isEndOfWord = False
 
+	# add nodes in the trie 
 	def insert(self, key):
 		length = len(key)
 		for level in range(length):
@@ -13,6 +14,7 @@ class Trie:
 
 		self.isEndOfWord = True
 
+	# search function to search a particular word
 	def search(self, key):
 		
 		if self.isEndOfWord and len(key) == 0:
@@ -24,7 +26,7 @@ class Trie:
 			self = self.children[key[level]]
 		return True
 
-
+	# this function traverses the graph from a particular point
 	def travel(self, key):
 		if self.isEndOfWord:
 			print(key)
@@ -32,6 +34,7 @@ class Trie:
 			string_append = key + new
 			self.children[new].travel(string_append)
 
+	# checks whether the partial string is correct or not
 	def auto(self, key):
 		make_string = ''
 		length = len(key)
@@ -44,6 +47,7 @@ class Trie:
 		self.travel(make_string)
 		return 'Completed'
 
+	# suggest the words
 	def suggest(self, key):
 		 new_string = ''
 		 length = len(key)
@@ -54,25 +58,25 @@ class Trie:
 		 	else:
 		 		break
 		 self.travel(new_string)
-		 return 'Done' 
+		 return 'Completed' 
 
 
-list = ['age',
-	'agee',
-	'agree',
-	'bowl',
-	'ball',
-	'bat',
-	'bark',
-	'ba',
-	'bench',
-	'bet',
-	'bery',
-	'blink',
-	'blie',]
+# list = ['age',
+# 	'agee',
+# 	'agree',
+# 	'bowl',
+# 	'ball',
+# 	'bat',
+# 	'bark',
+# 	'ba',
+# 	'bench',
+# 	'bet',
+# 	'bery',
+# 	'blink',
+# 	'blie',]
 
-t = Trie()
-for words in list:
-	t.insert(words)
+# t = Trie()
+# for words in list:
+# 	t.insert(words)
 
-print(t.suggest('ax'))
+# print(t.suggest('ax'))

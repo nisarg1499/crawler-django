@@ -5,15 +5,13 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as auth_login
 
-
-# def log(request):
-# 	logout(request)
-# 	return HttpResponse('Done logout')
-
+# function for logout
+@login_required
 def logout(request):
 	logout(request)
 	return HttpResponse('Done logout')
 
+# function for new user registration
 def signUp(request):
 	registered = False
 	if request.method == 'POST':
@@ -30,7 +28,7 @@ def signUp(request):
 		user_form = UserForm()
 		return render(request, 'signup.html', {'user_form' : user_form, 'registered': registered})
 
-
+# function to login
 def login(request):
 	if request.user.is_authenticated:
 		return HttpResponse('Already logged in')
