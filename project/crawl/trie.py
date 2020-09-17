@@ -44,23 +44,35 @@ class Trie:
 		self.travel(make_string)
 		return 'Completed'
 
+	def suggest(self, key):
+		 new_string = ''
+		 length = len(key)
+		 for level in range(length):
+		 	if key[level] in self.children:
+		 		new_string += key[level]
+		 		self = self.children[key[level]]
+		 	else:
+		 		break
+		 self.travel(new_string)
+		 return 'Done' 
 
-# list = ['age',
-# 	'agee',
-# 	'agree',
-# 	'bowl',
-# 	'ball',
-# 	'bat',
-# 	'bark',
-# 	'ba',
-# 	'bench',
-# 	'bet',
-# 	'bery',
-# 	'blink',
-# 	'blie',]
 
-# t = Trie()
-# for words in list:
-# 	t.insert(words)
+list = ['age',
+	'agee',
+	'agree',
+	'bowl',
+	'ball',
+	'bat',
+	'bark',
+	'ba',
+	'bench',
+	'bet',
+	'bery',
+	'blink',
+	'blie',]
 
-# print(t.search('aaa'))
+t = Trie()
+for words in list:
+	t.insert(words)
+
+print(t.suggest('ax'))
