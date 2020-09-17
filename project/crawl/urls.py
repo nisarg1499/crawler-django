@@ -8,5 +8,6 @@ urlpatterns = [
 	path('login/', views_register.login, name = 'login'),
 	path('logout/', views.logout, name = 'logout'),
 	path('history/', views.getBlogs, name = 'getBlogs'),
-	path('show/', views.showHistory, name = 'showHistory')
+	path('show/', views.showHistory, name = 'showHistory'),
+	path('auto/<str:word>', views.autoComplete, name = 'autoComplete')
 ]

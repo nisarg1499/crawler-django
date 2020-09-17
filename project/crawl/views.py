@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from .models import History
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from trie import Trie
 
 scrapyd = ScrapydAPI('http://127.0.0.1:6800')
 
@@ -59,6 +60,32 @@ def showHistory(request):
 	print(filtered.distinct())
 
 	return HttpResponse('History displayed on console')
+
+@login_required
+def autoComplete(request, word):
+
+	list = ['age',
+	'agee',
+	'agree',
+	'bowl',
+	'ball',
+	'bat',
+	'bark',
+	'ba',
+	'bench',
+	'bet',
+	'bery',
+	'blink',
+	'blie',]
+
+	t = Trie()
+	for words in list:
+		t.insert(words)
+
+	print(t.auto(word))
+
+
+
 
 
 
