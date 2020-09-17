@@ -47,11 +47,8 @@ class ArticleScraper(scrapy.Spider):
 	def parse_article(self, response):
 		article = response.meta.get('blogs')
 
-		# article['tags'] = response.css('div[class="rs s"]').getall()
-		# print(article['tags'])
 		article['blog_content'] = response.css('article[class="meteredContent"] *::text')
 		article['blog_content'] = '\n'.join(article['blog_content'].getall())
-		# print(json.dumps(article, indent = 2))
 
 		with open(article['title'], 'w') as f:
 			f.write(
